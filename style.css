@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+  }
+
+body {
+    text-align: center;
+}
+
+#game-container {
+    display: grid;
+    grid-gap: 1vh;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    width: 60vh;
+    height: 60vh;
+    margin: auto;
+    
+}
+
+.grid-item {
+    background-color: red;
+    color: white;
+    font-size: 3em;
+}
+
+div .grid-item {
+    
+    line-height: 18vh;
+}
+
+.grid-item:hover {
+    cursor: pointer;
+}
