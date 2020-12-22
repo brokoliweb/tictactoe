@@ -1,5 +1,6 @@
 let game = (function () {
   let gameTable = document.getElementById("game-container");
+  let infoBtn = document.getElementById("info");
   let gameBoard = {
     0: "",
     1: "",
@@ -11,7 +12,9 @@ let game = (function () {
     7: "",
     8: "",
   };
-  
+
+  let countX = 0;
+  let countO = 0;
 
   // render gametable at the start
   let render = function () {
@@ -25,13 +28,33 @@ let game = (function () {
 
   // check if there is a winner
   let checkWinner = function () {
-   if ((gameBoard[0] && gameBoard[1] && gameBoard[2] === 'X') || (gameBoard[3] && gameBoard[4] && gameBoard[5] === 'X') || (gameBoard[6] && gameBoard[7] && gameBoard[8] === 'X') || (gameBoard[0] && gameBoard[3] && gameBoard[6] === 'X') || (gameBoard[1] && gameBoard[4] && gameBoard[7] === 'X') || (gameBoard[2] && gameBoard[5] && gameBoard[8] === 'X') || (gameBoard[0] && gameBoard[4] && gameBoard[8] === 'X') || (gameBoard[2] && gameBoard[4] && gameBoard[6] === 'X')) {
-    document.getElementById('info').textContent = 'Player Wins';
-   } else if ((gameBoard[0] && gameBoard[1] && gameBoard[2] === 'O') || (gameBoard[3] && gameBoard[4] && gameBoard[5] === 'O') || (gameBoard[6] && gameBoard[7] && gameBoard[8] === 'O') || (gameBoard[0] && gameBoard[3] && gameBoard[6] === 'O') || (gameBoard[1] && gameBoard[4] && gameBoard[7] === 'O') || (gameBoard[2] && gameBoard[5] && gameBoard[8] === 'O') || (gameBoard[0] && gameBoard[4] && gameBoard[8] === 'O') || (gameBoard[2] && gameBoard[4] && gameBoard[6] === 'O')) {
-    document.getElementById('info').textContent = 'Computer Wins';
-
-   }
-  }
+    if (
+      (gameBoard[0] === "X" && gameBoard[1] === "X" && gameBoard[2] === "X") ||
+      (gameBoard[3] === "X" && gameBoard[4] === "X" && gameBoard[5] === "X") ||
+      (gameBoard[6] === "X" && gameBoard[7] === "X" && gameBoard[8] === "X") ||
+      (gameBoard[0] === "X" && gameBoard[3] === "X" && gameBoard[6] === "X") ||
+      (gameBoard[1] === "X" && gameBoard[4] === "X" && gameBoard[7] === "X") ||
+      (gameBoard[2] === "X" && gameBoard[5] === "X" && gameBoard[8] === "X") ||
+      (gameBoard[0] === "X" && gameBoard[4] === "X" && gameBoard[8] === "X") ||
+      (gameBoard[2] === "X" && gameBoard[4] === "X" && gameBoard[6] === "X")
+    ) {
+      infoBtn.textContent = "Player Wins";
+      
+    } else if (
+      (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard[2] === "O") ||
+      (gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard[5] === "O") ||
+      (gameBoard[6] === "O" && gameBoard[7] === "O" && gameBoard[8] === "O") ||
+      (gameBoard[0] === "O" && gameBoard[3] === "O" && gameBoard[6] === "O") ||
+      (gameBoard[1] === "O" && gameBoard[4] === "O" && gameBoard[7] === "O") ||
+      (gameBoard[2] === "O" && gameBoard[5] === "O" && gameBoard[8] === "O") ||
+      (gameBoard[0] === "O" && gameBoard[4] === "O" && gameBoard[8] === "O") ||
+      (gameBoard[2] === "O" && gameBoard[4] === "O" && gameBoard[6] === "O")
+    ) {
+      infoBtn.textContent = "Computer Wins";
+      
+    }
+    console.log(gameBoard[1]);
+  };
 
   // listen and draw X on click
   let listen = function (e) {
@@ -42,14 +65,41 @@ let game = (function () {
   };
 
   let drawX = function (e) {
-    let humanPlay = (e.target.textContent = "X");
-    let id = e.target.id;
-    gameBoard[e.target.id[9]] = humanPlay;
-    
-    
+   
+    let gameBoardArray = Object.values(gameBoard);
+
+    if (infoBtn.textContent === "Your turn to play") {
+      let humanPlay = (e.target.textContent = "X");
+      let id = e.target.id;
+      gameBoard[id[9]] = humanPlay;
+      infoBtn.textContent = "Computer Turn";
+    }
+
     checkWinner();
-    
+
+    Computerchoice();
+    return gameBoardArray;
   };
+
+  // computer play and drawO
+
+  let Computerchoice = function() {
+    
+
+    let choice = Math.floor(Math.random() * 9);
+    
+    console.log(choice);
+    if (gameBoard[choice] === "") {
+      let computerPlay = document.getElementById(`grid-item${choice}`).textContent = "O";
+      gameBoard[choice] = computerPlay;
+      infoBtn.textContent = "Your turn to play";
+      
+    } else {
+      Computerchoice();
+    }
+    checkWinner();
+  };
+
   return {
     render,
   };
