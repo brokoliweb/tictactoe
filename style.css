@@ -49,3 +49,10 @@ div .grid-item {
 .end {
     visibility: visible !important;
 }
+
+button {
+    width: 60vh;
+    line-height: 2em;
+    font-size: 1em;
+    
+}
