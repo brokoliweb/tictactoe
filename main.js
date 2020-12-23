@@ -101,7 +101,14 @@ let game = (function () {
 
   let stopGame = function () {
     let visible = document.getElementById("endgame");
+    let endGameMessage = document.getElementById("winnerp");
     visible.setAttribute("class", "end");
+    infoBtn.setAttribute("class", "info-btn");
+    if (infoBtn.textContent === "Player Wins") {
+      endGameMessage.textContent = "Player Wins";
+    } else {
+      endGameMessage.textContent = "Computer Wins";
+    }
   };
 
   return {
