@@ -105,9 +105,11 @@ let game = (function () {
     visible.setAttribute("class", "end");
     infoBtn.setAttribute("class", "info-btn");
     if (infoBtn.textContent === "Player Wins") {
-      endGameMessage.textContent = "Player Wins";
+      endGameMessage.textContent = "Player Wins!";
+    } else if (infoBtn.textContent === "Computer Wins"){
+      endGameMessage.textContent = "Computer Wins!";
     } else {
-      endGameMessage.textContent = "Computer Wins";
+      endGameMessage.textContent = "It's a Draw!"
     }
   };
 
