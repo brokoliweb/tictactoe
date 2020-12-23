@@ -28,6 +28,7 @@ let game = (function () {
 
   // check if there is a winner
   let checkWinner = function () {
+    let gameBoardArray = Object.values(gameBoard);
     if (
       (gameBoard[0] === "X" && gameBoard[1] === "X" && gameBoard[2] === "X") ||
       (gameBoard[3] === "X" && gameBoard[4] === "X" && gameBoard[5] === "X") ||
@@ -40,8 +41,6 @@ let game = (function () {
     ) {
       infoBtn.textContent = "Player Wins";
       stopGame();
-      
-      
     } else if (
       (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard[2] === "O") ||
       (gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard[5] === "O") ||
@@ -54,8 +53,10 @@ let game = (function () {
     ) {
       infoBtn.textContent = "Computer Wins";
       stopGame();
-    }
-    else if (infoBtn.textContent === "Computer Turn") {
+    } else if (!gameBoardArray.includes("")) {
+      infoBtn.textContent = "Draw";
+      stopGame();
+    } else if (infoBtn.textContent === "Computer Turn") {
       Computerchoice();
     }
   };
@@ -69,9 +70,6 @@ let game = (function () {
   };
 
   let drawX = function (e) {
-   
-    let gameBoardArray = Object.values(gameBoard);
-
     if (infoBtn.textContent === "Your turn to play") {
       let humanPlay = (e.target.textContent = "X");
       let id = e.target.id;
@@ -80,24 +78,19 @@ let game = (function () {
     }
 
     checkWinner();
-
-    
-    return gameBoardArray;
   };
 
   // computer play and drawO
 
-  let Computerchoice = function() {
-    
-
+  let Computerchoice = function () {
     let choice = Math.floor(Math.random() * 9);
-    
-    console.log(choice);
+
     if (gameBoard[choice] === "") {
-      let computerPlay = document.getElementById(`grid-item${choice}`).textContent = "O";
+      let computerPlay = (document.getElementById(
+        `grid-item${choice}`
+      ).textContent = "O");
       gameBoard[choice] = computerPlay;
       infoBtn.textContent = "Your turn to play";
-      
     } else {
       Computerchoice();
     }
@@ -106,10 +99,10 @@ let game = (function () {
 
   // stop the game
 
-  let stopGame = function() {
+  let stopGame = function () {
     let visible = document.getElementById("endgame");
-    visible.setAttribute('class', 'end');
-  }
+    visible.setAttribute("class", "end");
+  };
 
   return {
     render,
