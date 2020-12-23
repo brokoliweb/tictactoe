@@ -41,6 +41,7 @@ let game = (function () {
       infoBtn.textContent = "Player Wins";
       stopGame();
       
+      
     } else if (
       (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard[2] === "O") ||
       (gameBoard[3] === "O" && gameBoard[4] === "O" && gameBoard[5] === "O") ||
@@ -54,7 +55,9 @@ let game = (function () {
       infoBtn.textContent = "Computer Wins";
       stopGame();
     }
-    console.log(gameBoard[1]);
+    else if (infoBtn.textContent === "Computer Turn") {
+      Computerchoice();
+    }
   };
 
   // listen and draw X on click
@@ -78,7 +81,7 @@ let game = (function () {
 
     checkWinner();
 
-    Computerchoice();
+    
     return gameBoardArray;
   };
 
