@@ -32,3 +32,20 @@ div .grid-item {
 .grid-item:hover {
     cursor: pointer;
 }
+
+#endgame {
+    position: absolute;
+    bottom: 0vh;
+    right: 0vw;
+    width: 100vw;
+    height: 100vh;
+    line-height: 30vh;
+    background: white;
+    opacity: 80%;
+    font-size: 4em;
+    visibility: hidden;
+}
+
+.end {
+    visibility: visible !important;
+}

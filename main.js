@@ -39,6 +39,7 @@ let game = (function () {
       (gameBoard[2] === "X" && gameBoard[4] === "X" && gameBoard[6] === "X")
     ) {
       infoBtn.textContent = "Player Wins";
+      stopGame();
       
     } else if (
       (gameBoard[0] === "O" && gameBoard[1] === "O" && gameBoard[2] === "O") ||
@@ -51,7 +52,7 @@ let game = (function () {
       (gameBoard[2] === "O" && gameBoard[4] === "O" && gameBoard[6] === "O")
     ) {
       infoBtn.textContent = "Computer Wins";
-      
+      stopGame();
     }
     console.log(gameBoard[1]);
   };
@@ -99,6 +100,13 @@ let game = (function () {
     }
     checkWinner();
   };
+
+  // stop the game
+
+  let stopGame = function() {
+    let visible = document.getElementById("endgame");
+    visible.setAttribute('class', 'end');
+  }
 
   return {
     render,
