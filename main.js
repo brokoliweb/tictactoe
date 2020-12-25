@@ -70,7 +70,7 @@ let game = (function () {
   };
 
   let drawX = function (e) {
-    if (infoBtn.textContent === "Your turn to play") {
+    if (infoBtn.textContent === "Your turn to play" && e.target.textContent === '') {
       let humanPlay = (e.target.textContent = "X");
       let id = e.target.id;
       gameBoard[id[9]] = humanPlay;
